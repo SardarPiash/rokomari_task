@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+.main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:2% 10% 2% 10%;
+}
+.order-container{
+    width: 65%;
+    height: 100%;
+    border: 1px solid black;
+}
+.ship-address-container{
+    width: 30%;
+    height: 100%;
+    border: 1px solid black;
+}
+
+/* order-track-container */
+.order-track-container{
+    width: 100%;
+    height: 100%;
+}
+.track-text{
+    width: 90%;
+    height: 100%;
+    margin-top: 10px;
+}
+.track-heading{
+    font-size: 25px;
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
+}
+
+.track-need-text{
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 200;
+    display: flex;
+    justify-content: center;
+}
+
+/* order-progress-bar */
+.progress-container{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+.progress-bar{
+
+}
+.track-offer{
+    
+}
