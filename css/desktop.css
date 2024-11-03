@@ -54,8 +54,38 @@
     padding: 20px;
 }
 .progress-bar{
-
+    width: 100%;
+    height: 100%;
 }
 .track-offer{
-    
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.discount-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 10px;
+}
+.discount-text{
+    margin-bottom: 6px;
+}
+/* .discount-on-order{
+
+} */
+
+/* Select box css */
+.select-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: space-around;
+    margin: 10px;
 }
