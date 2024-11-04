@@ -3,7 +3,11 @@ let totalParchaseAmount = 700;
 let trackOfferDiv;
 let selectAllDiv;
 let orderListDiv;
-let selectAllState = false;
+let productQuantity
+let tempDisPrice = 10
+let tempOriPrice = 10
+let selectAllState = true;
+
 
 // discount on offer track
 // data
@@ -77,7 +81,7 @@ function SelectAll() {
     <span>SelectAll(2 items)</span>
     </div>
     <div class="select-total-amount"> 
-    <span>Your Total:<span class="select-discount-text">ট600</span>ট700</span>
+    <span>Your Total:<span class="select-discount-text">ট 0 ট 0 </span></span>
     </div>
     `;
 
@@ -106,7 +110,7 @@ function OrderList() {
     <div>
         <div class="order-list-elements">
             <div class="order-list-info">
-            <div class="order-checkbox"><input data-index=${index} type="checkbox" class="product-checkbox" name="checkbox" value="" /></div> 
+            <div class="order-checkbox"><input data-index=${index} type="checkbox" class="product-checkbox" name="checkbox" value="" onchange="handleYourTotal(${index})"/></div> 
                 <div class="product-img"><img class="order-product-img" src="./assets/book.jpg" /></div> 
                 <div class="product-info">
                 <div class="product-data">
@@ -134,8 +138,9 @@ function OrderList() {
               </div>
             </div>
             <div class="price-container">
-                <span class="price-original">ট${data.original_price}</span>
                 <span class="price-discount">ট${data.discounted_price}</span>
+                <span class="price-original">ট${data.original_price}</span>
+                
             </div>
         </div>
         <div class="border"></div>
@@ -191,12 +196,7 @@ function CustomerAddress(addressData){
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  DiscountAmount();
-  SelectAll();
-  OrderList();
-  CustomerAddress(addressData);
-});
+
 
 
 // handle select all function
@@ -223,14 +223,14 @@ function ProductInputCheckbox(){
 function handleProductQuantity(index,value){
   const products = document.querySelectorAll('.order-quantity-number');
   const product = products[index];
-  let productQuantity = parseInt(product.innerHTML,10);
+  productQuantity = parseInt(product.innerHTML,10);
 
   const productsPrice = document.querySelectorAll('.price-container');
   const availability = document.querySelectorAll('.availability');
   const available  = availability[index];
   const productPrice = productsPrice[index];
-  let tempDisPrice = orderListData[index].discounted_price;
-  let tempOriPrice = orderListData[index].original_price;
+  tempDisPrice = orderListData[index].discounted_price;
+  tempOriPrice = orderListData[index].original_price;
   let bookAvailabe = orderListData[index].availability;
 // book quantity control
   if(value){
@@ -248,11 +248,50 @@ function handleProductQuantity(index,value){
 // price calculation
   tempDisPrice = tempDisPrice *  productQuantity;
   tempOriPrice = tempOriPrice *  productQuantity;
-  const newPrice = `<span class="price-original">tk${tempOriPrice}</span>
-                    <span class="price-discount">tk${tempDisPrice}</span>`;
-console.log(bookAvailabe)
+  const newPrice = `<span class="price-discount">tk${tempDisPrice}</span>
+                    <span class="price-original">tk${tempOriPrice}</span>`;
+
   product.innerHTML = productQuantity;
   productPrice.innerHTML = newPrice;
   available.innerHTML = bookAvailabe;
+  handleYourTotal();
 }
 
+// 
+function handleYourTotal() {
+  let totalOriginalPrice = 0;
+  let totalDiscountPrice = 0;
+  
+  const productCheckboxDiv = document.querySelectorAll('.product-checkbox');
+  const productQuantities = document.querySelectorAll('.order-quantity-number');
+  //const productsPrice = document.querySelectorAll('.price-container');
+
+  productCheckboxDiv.forEach((checkbox, index) => {
+    if (checkbox.checked) {
+      let productQuantity = parseInt(productQuantities[index].innerHTML, 10);
+      
+      const originalPrice = orderListData[index].original_price * productQuantity;
+      const discountedPrice = orderListData[index].discounted_price * productQuantity;
+      
+      // Add to total
+      totalOriginalPrice = totalOriginalPrice + originalPrice;
+      totalDiscountPrice = totalDiscountPrice + discountedPrice;
+    }
+  });
+
+  document.querySelector('.select-total-amount .select-discount-text').innerHTML = `ট${totalDiscountPrice}`;
+  document.querySelector('.select-total-amount').lastChild.textContent = ` ট${totalOriginalPrice}`;
+
+  console.log("Total Original Price:", totalOriginalPrice, "Total Discounted Price:", totalDiscountPrice);
+}
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  DiscountAmount();
+  SelectAll();
+  OrderList();
+  CustomerAddress(addressData);
+  handleYourTotal();
+});
