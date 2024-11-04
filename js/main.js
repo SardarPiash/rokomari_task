@@ -116,11 +116,11 @@ function OrderList() {
                 </div>
             </div>
             <div class="order-quantity-container">
-                <div class="order-quantity-elements">
-                    <div style="">-</div>
-                    <div>${data.quantity}</div>
-                    <div>-</div>
-                </div>
+<div class="order-quantity-elements">
+    <div class="order-quantity-block">-</div>
+    <div class="order-quantity-number">1</div>
+    <div class="order-quantity-block">+</div>
+</div>
             </div>
             <div class="price-container">
                 <span>tk${data.original_price}</span>
