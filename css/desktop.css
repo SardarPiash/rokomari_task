@@ -213,10 +213,29 @@
     height: 160px;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    background-color: rgb(202, 64, 220);
 }
+.price-original{
+   width: 50%;
+   height: 100%;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: line-through;
+    font-weight: 100;
+    font-size: 25px;
+}
+.price-discount{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 100;
+    font-size: 25px;
+}
+
 
 .border{
     border-top: 1px solid black;

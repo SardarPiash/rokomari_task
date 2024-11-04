@@ -77,7 +77,7 @@ function SelectAll() {
     <span>SelectAll(2 items)</span>
     </div>
     <div class="select-total-amount"> 
-    <span>Your Total:<span class="select-discount-text">tk600</span>tk700</span>
+    <span>Your Total:<span class="select-discount-text">ট600</span>ট700</span>
     </div>
     `;
   selectAllDiv.appendChild(selectDivElements);
@@ -116,15 +116,15 @@ function OrderList() {
                 </div>
             </div>
             <div class="order-quantity-container">
-<div class="order-quantity-elements">
-    <div class="order-quantity-block">-</div>
-    <div class="order-quantity-number">1</div>
-    <div class="order-quantity-block">+</div>
-</div>
+              <div class="order-quantity-elements">
+                  <div class="order-quantity-block">-</div>
+                  <div class="order-quantity-number">1</div>
+                  <div class="order-quantity-block">+</div>
+              </div>
             </div>
             <div class="price-container">
-                <span>tk${data.original_price}</span>
-                <span>tk${data.discounted_price}</span>
+                <span class="price-original">ট${data.original_price}</span>
+                <span class="price-discount">ট${data.discounted_price}</span>
             </div>
         </div>
         <div class="border"></div>
