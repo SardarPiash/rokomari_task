@@ -7,6 +7,9 @@ let productQuantity;
 let tempDisPrice = 10;
 let tempOriPrice = 10;
 let selectAllState = true;
+let discountOffer = 0 ;
+let shippingCharge = 70 ;
+let discountOnShippingCharge = 0;
 
 // discount on offer track
 // data
@@ -72,8 +75,6 @@ function SelectAll() {
   selectAllDiv.innerHTML = "";
   const selectDivElements = document.createElement("div");
   selectDivElements.classList.add("select-elements");
-  //const checked = document.getElementById('ii');
-  //checked.checked = true
   selectDivElements.innerHTML = `
     <div class="select-checkbox">
     <span><input id="select-all-input" type="checkbox" name="checkbox" value="" onchange="handleSelectAll()" /></span>
@@ -142,8 +143,9 @@ function OrderList() {
               </div>
             </div>
             <div class="price-container">
-                <span class="price-discount">ট${data.discounted_price}</span>
                 <span class="price-original">ট${data.original_price}</span>
+                <span class="price-discount">ট${data.discounted_price}</span>
+                
                 
             </div>
         </div>
@@ -180,10 +182,23 @@ function CustomerAddress(addressData) {
                <span><b>${addressData.area}</b> (${addressData.place})</span>
             </div>
             <div class="change-location">
-               <span>1</span>
-               <span>Change Address</span>
+            <button class="change-address-button" onclick="handleOpenModal()">
+               <div class="change-address-elements">
+               <div class="s">
+                  <div class="c">
+                  <div class="g">
+                    <div class="f">
+                        <div class="m"> 
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+               </div>
+               <div>Change Address</div>
             </div>
         </div>
+            </button>
+            </div>
         <div class="customer-name">
            <span>Name:${addressData.name}</span>
            <span>Phone:${addressData.phone}</span>
@@ -246,8 +261,9 @@ function handleProductQuantity(index, value) {
   // price calculation
   tempDisPrice = tempDisPrice * productQuantity;
   tempOriPrice = tempOriPrice * productQuantity;
-  const newPrice = `<span class="price-discount">tk${tempDisPrice}</span>
-                    <span class="price-original">tk${tempOriPrice}</span>`;
+  const newPrice = `<span class="price-original">ট${tempOriPrice}</span>
+                    <span class="price-discount">ট${tempDisPrice}</span>
+                    `;
 
   product.innerHTML = productQuantity;
   productPrice.innerHTML = newPrice;
@@ -299,12 +315,55 @@ function handleYourTotal() {
   document.querySelector(
     ".select-total-amount .select-discount-text"
   ).innerHTML = `
+  <span class="discounted-price"> ট${totalOriginalPrice}</span>
   <span class="original-price">ট${totalDiscountPrice}</span>
-  <span class="discounted-price"> ট${totalOriginalPrice}</span>`;
-  //document.querySelector('.select-total-amount').lastChild.textContent = ` ট${totalOriginalPrice}`;
+  `;
+
+  // call check sumury to update based on action
+  checkSummary();
 }
 
-//
+//check sumury handle function
+function checkSummary(){
+   const priceDiv = document.querySelectorAll('.original-price');
+   let price = parseInt((priceDiv[0].innerHTML).replace(/[^0-9]/g, ''));
+   
+   price = price;
+   let totalPrice = price + shippingCharge;
+   
+   const subtotal = document.querySelectorAll('.checkout-details-container')[0];
+   const shipping = document.querySelectorAll('.checkout-details-container')[1];
+   const total = document.querySelectorAll('.checkout-details-container')[2];
+   
+   subtotal.innerHTML=`
+   <span>Subtotal</span>
+   <span>ট ${price}</span>
+   `;
+
+   shipping.innerHTML=`
+   <span>Shipping</span>
+   <span>ট ${shippingCharge}</span>
+   `;
+
+   total.innerHTML=`
+   <span>Shipping</span>
+   <span>ট ${totalPrice}</span>
+   `;
+}
+
+
+
+//open modal
+function handleOpenModal(){
+ const modal = document.getElementById('modal-container');
+ modal.style.display = 'block';
+}
+//close modal
+function handleCloseModal(){
+  const modal = document.getElementById('modal-container');
+  modal.style.display = 'none';
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   DiscountAmount();
@@ -312,4 +371,13 @@ document.addEventListener("DOMContentLoaded", () => {
   OrderList();
   CustomerAddress(addressData);
   handleYourTotal();
+  checkSummary();
+
+  // add event listener for closing the modal
+  document.getElementById('modal-container').addEventListener('click', function(event) {
+    const modalContent = document.getElementById('modal');
+    if (event.target === this) { 
+      handleCloseModal();
+    }
+  });
 });

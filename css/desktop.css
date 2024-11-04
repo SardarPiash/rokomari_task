@@ -430,6 +430,141 @@
     border: none;
     background-color: transparent;
 }
-.original-price {
+.discounted-price {
     text-decoration: line-through;
 }
+
+
+
+
+/* Modal create */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(96, 96, 96, 0.8); 
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  /* Modal content  */
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 50%;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    text-align: center;
+    position: fixed; 
+    top: 50%;      
+    left: 50%;     
+    transform: translate(-50%, -50%); 
+  }
+  .form-container{
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--borderclr);
+    border-radius: 2px;
+  }
+  .form-elements{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items:start ;
+    padding:20px 220px 20px 200px;
+  }
+  .form-heading{
+    font-size: 30px;
+    padding: 10px;
+    font-weight: 500;
+  }
+  .input-filed{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  .input-filed span:first-child{
+    font-size: 20px;
+  }
+  .input-filed span:last-child{
+    width: 100%;
+    height: auto;
+  }
+  .input-filed span:last-child input{
+    width: 100%;
+    height: 30px;
+    border: 1px solid rgb(97, 97, 97);
+    border-radius: 4px;
+  }
+  .input-filed span:last-child input:focus{
+    border: 1px solid rrgb(52, 52, 52)
+  }
+
+
+  /* making pencil icon */
+  .s{
+    width: 25px;
+    height: 20px;
+    position: relative;
+  }
+  .c{
+    width: 6px;
+    height: 6px;
+    border: 1px solid rgb(67, 185, 185);
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+  }
+  .g{
+    width: 5px;
+    height: 13px;
+    border-left: 1px solid rgb(67, 185, 185);
+    border-right: 1px solid rgb(67, 185, 185);
+    position: absolute;
+    right: 5px;
+    top: 1px;
+    transform: rotate(45deg);
+  }
+  .f{
+    width: 0px;
+    height: 5px;
+    border-right: 1px solid rgb(67, 185, 185);
+    position: absolute;
+    right: 7px;
+    left: 0px;
+    top: 14px;
+    transform: rotate(-18deg);
+  }
+  .m{
+    width: 0px;
+    height: 5px;
+    border-left: 1px solid rgb(67, 185, 185);
+    position: absolute;
+    transform: rotate(50deg);
+    left: 2px;
+  }
+
+  /* general style */
+  .change-address-button{
+    width: 100%;
+    height: auto;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .change-address-elements{
+    display: flex;
+    gap: 3px;
+    flex-direction: row;
+    color: rgb(67, 185, 185);
+  }
