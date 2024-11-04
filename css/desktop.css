@@ -225,6 +225,7 @@
     text-decoration: line-through;
     font-weight: 100;
     font-size: 25px;
+    color: #8c8787;
 }
 .price-discount{
     width: 50%;
@@ -234,6 +235,39 @@
     justify-content: center;
     font-weight: 100;
     font-size: 25px;
+}
+
+.order-confirm-div{
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: end;
+    gap: 15px;
+}
+.order-button-gift{
+    box-sizing: border-box;
+    width: 220px;
+    height: auto;
+    padding: 18px;
+    font-size: larger;
+    background-color: rgb(255, 255, 254);
+    cursor: pointer;
+    border: 2px solid rgb(231, 100, 248);
+    border-radius: 3px;
+    color: rgb(231, 100, 248);
+}
+.order-button-shipping{
+    box-sizing: border-box;
+    width: 220px;
+    height: auto;
+    padding: 18px;
+    font-size: larger;
+    background-color: orange;
+    cursor: pointer;
+    border:  2px solid orange;
+    border-radius: 3px;
+    color: white;
 }
 
 

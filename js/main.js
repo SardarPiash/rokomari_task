@@ -88,6 +88,11 @@ function OrderList() {
   let orderListContent = "";
   orderListDiv = document.getElementById("order-list-container");
   orderListDiv.innerHTML = "";
+  const orderConfimDiv = document.createElement("div");
+  orderConfimDiv.classList.add('order-confirm-div');
+  orderConfimDiv.innerHTML = `<span><button class="order-button-gift">Order as a Gift</button></span>
+  <span><button class="order-button-shipping">Go to Shipping Page</button></span>
+  `;
 
   const orderListElement = document.createElement("div");
   //orderListElement.classList.add('');
@@ -133,6 +138,7 @@ function OrderList() {
   });
   orderListElement.innerHTML = orderListContent;
   orderListDiv.appendChild(orderListElement);
+  orderListDiv.appendChild(orderConfimDiv);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
