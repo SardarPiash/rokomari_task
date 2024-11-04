@@ -3,6 +3,7 @@ let totalParchaseAmount = 700;
 let trackOfferDiv;
 let selectAllDiv;
 let orderListDiv;
+let selectAllState = false;
 
 // discount on offer track
 // data
@@ -70,17 +71,22 @@ function SelectAll() {
   selectAllDiv.innerHTML = "";
   const selectDivElements = document.createElement("div");
   selectDivElements.classList.add("select-elements");
-
+  //const checked = document.getElementById('ii');
+  //checked.checked = true
   selectDivElements.innerHTML = `
     <div class="select-checkbox">
-    <span><input type="checkbox" name="checkbox" value="" /></span>
+    <span><input id="select-all-input" type="checkbox" name="checkbox" value="" onchange="handleSelectAll()" /></span>
     <span>SelectAll(2 items)</span>
     </div>
     <div class="select-total-amount"> 
     <span>Your Total:<span class="select-discount-text">ট600</span>ট700</span>
     </div>
     `;
+
+   
   selectAllDiv.appendChild(selectDivElements);
+  let checkedb = document.getElementById('select-all-input');
+  checkedb.checked = selectAllState;
 }
 
 // order list container
@@ -102,7 +108,7 @@ function OrderList() {
     <div>
         <div class="order-list-elements">
             <div class="order-list-info">
-            <div class="order-checkbox"><input type="checkbox" name="checkbox" value="" /></div> 
+            <div class="order-checkbox"><input data-index=${index} type="checkbox" class="product-checkbox" name="checkbox" value="" /></div> 
                 <div class="product-img"><img class="order-product-img" src="./assets/book.jpg" /></div> 
                 <div class="product-info">
                 <div class="product-data">
@@ -139,6 +145,7 @@ function OrderList() {
   orderListElement.innerHTML = orderListContent;
   orderListDiv.appendChild(orderListElement);
   orderListDiv.appendChild(orderConfimDiv);
+  ProductInputCheckbox();
 }
 
 // shipping address function
@@ -182,9 +189,32 @@ function CustomerAddress(addressData){
 
 
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
   DiscountAmount();
   SelectAll();
   OrderList();
   CustomerAddress(addressData);
 });
+
+
+// handle select all function
+function handleSelectAll(){
+  selectAllState = !selectAllState
+  console.log(selectAllState)
+  ProductInputCheckbox()
+}
+
+// checked uncheck checking
+function ProductInputCheckbox(){
+  const checkbox = document.querySelectorAll('.product-checkbox');
+  checkbox.forEach((check)=>{
+    if(selectAllState){
+      check.checked = true;
+    }else{
+      check.checked = false;
+    }
+  })
+
+}
