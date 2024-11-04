@@ -381,7 +381,7 @@
 .checkout-container{
     width: 100%;
     height: auto;
-    border: 1px solid black;
+    border: 1px solid var(--borderclr);
 }
 .checkout-container-child{
     width: 100%;
@@ -393,11 +393,32 @@
 .checkout-sumury{
     width: 100%;
     height: auto;
-    padding: 0 0 15px 0;
+    padding: 0 0 10px 0;
     font-size: 30px;
 }
 .border-stright{
     width: 100%;
     height: auto;
-    border: 1px solid var(--borderclr);
+    border-top: 1px solid var(--borderclr);
+    margin-bottom: 5px;
+} 
+.checkout-details-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+   
+}
+.checkout-details-container span:first-child{
+    font-size: 20px;
+}
+.checkout-details-container span:last-child{
+    font-size: 15px;
+}
+.border-dot{
+    width: 100%;
+    height: auto;
+    border-top: 1px dashed var(--borderclr);
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
