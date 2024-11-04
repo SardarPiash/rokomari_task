@@ -204,6 +204,7 @@ function handleSelectAll(){
   selectAllState = !selectAllState
   console.log(selectAllState)
   ProductInputCheckbox()
+  handleYourTotal();
 }
 
 // checked uncheck checking
@@ -257,17 +258,20 @@ function handleProductQuantity(index,value){
   handleYourTotal();
 }
 
-// 
+// handle your total ammount
 function handleYourTotal() {
   let totalOriginalPrice = 0;
   let totalDiscountPrice = 0;
+  let flag = false;
   
   const productCheckboxDiv = document.querySelectorAll('.product-checkbox');
   const productQuantities = document.querySelectorAll('.order-quantity-number');
-  //const productsPrice = document.querySelectorAll('.price-container');
 
   productCheckboxDiv.forEach((checkbox, index) => {
+    flag = checkbox.checked
     if (checkbox.checked) {
+      
+
       let productQuantity = parseInt(productQuantities[index].innerHTML, 10);
       
       const originalPrice = orderListData[index].original_price * productQuantity;
@@ -278,12 +282,22 @@ function handleYourTotal() {
       totalDiscountPrice = totalDiscountPrice + discountedPrice;
     }
   });
-
+  
+  // select all input become true or false
+  if(flag){
+    selectAllState = true
+    let checkedb = document.getElementById('select-all-input');
+    checkedb.checked = selectAllState;
+  }else{
+    selectAllState = false
+    let checkedb = document.getElementById('select-all-input');
+    checkedb.checked = selectAllState;
+  }
   document.querySelector('.select-total-amount .select-discount-text').innerHTML = `ট${totalDiscountPrice}`;
   document.querySelector('.select-total-amount').lastChild.textContent = ` ট${totalOriginalPrice}`;
-
-  console.log("Total Original Price:", totalOriginalPrice, "Total Discounted Price:", totalDiscountPrice);
 }
+
+//
 
 
 
