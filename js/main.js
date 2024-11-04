@@ -141,8 +141,50 @@ function OrderList() {
   orderListDiv.appendChild(orderConfimDiv);
 }
 
+// shipping address function
+const addressData = {
+  area: "Mirpur-1",
+  name: "Abu Shaleh Md. Kaium",
+  place:"Home",
+  phone: "01627754406",
+  fullAddress: "Flat#157/2/A, Ahamed Nagar, Paikepara, Mirpur-1, Dhaka, Bangladesh ",
+};
+function CustomerAddress(addressData){
+        const customerAddressDiv = document.getElementById('customer-address');
+       // customerAddressDiv.classList.add('customer-address-container')
+        const address = document.createElement('div');
+        address.innerHTML = `
+        <div class="customer-address-container">
+        <div class="customer-address">
+            <div class="address-location">
+               <span class="circle-1">
+               <span class="circle-2"></span>
+               </span>
+               <span><b>${addressData.area}</b> (${addressData.place})</span>
+            </div>
+            <div class="change-location">
+               <span>1</span>
+               <span>Change Address</span>
+            </div>
+        </div>
+        <div class="customer-name">
+           <span>Name:${addressData.name}</span>
+           <span>Phone:${addressData.phone}</span>
+        </div>
+        <div class="customer-fulladdress">
+           <span>${addressData.fullAddress}</span>
+        </div>
+        </div>
+        `;
+
+        customerAddressDiv.appendChild(address)
+}
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   DiscountAmount();
   SelectAll();
   OrderList();
+  CustomerAddress(addressData);
 });
