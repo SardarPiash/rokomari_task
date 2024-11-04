@@ -19,7 +19,6 @@ const orderListData = [
     title: "গল্পে গল্পে আল কুরআন সিরিজ",
     author: "মুহাম্মদ শামীমুল বাশির",
     availability: 4,
-    quantity: 1,
     original_price: 200,
     discounted_price: 180,
     selected: true,
@@ -28,7 +27,6 @@ const orderListData = [
     title: "গল্পে গল্পে আল কুরআন সিরিজ",
     author: "মুহাম্মদ শামীমুল বাশির",
     availability: 3,
-    quantity: 2,
     original_price: 400,
     discounted_price: 360,
     selected: true,
@@ -114,7 +112,7 @@ function OrderList() {
                 <div class="product-data">
                     <span>${data.title}</span>
                     <span>${data.author}</span>
-                    <span>Only ${data.availability} Copies Available</span>
+                    <span>Only <span class="availability">${data.availability}</span> Copies Available</span>
                     </div>
                     <div class="product-info-action">
                         <span>
@@ -128,9 +126,11 @@ function OrderList() {
             </div>
             <div class="order-quantity-container">
               <div class="order-quantity-elements">
-                  <div class="order-quantity-block">-</div>
+                  <div class="order-quantity-block">
+                  <button class="increment-button" onclick="handleProductQuantity(${index},false)">-</button></div>
                   <div class="order-quantity-number">1</div>
-                  <div class="order-quantity-block">+</div>
+                  <div class="order-quantity-block">
+                  <button class="increment-button" onclick="handleProductQuantity(${index},true)">+</button></div>
               </div>
             </div>
             <div class="price-container">
@@ -218,3 +218,41 @@ function ProductInputCheckbox(){
   })
 
 }
+
+// handleProductQuantity
+function handleProductQuantity(index,value){
+  const products = document.querySelectorAll('.order-quantity-number');
+  const product = products[index];
+  let productQuantity = parseInt(product.innerHTML,10);
+
+  const productsPrice = document.querySelectorAll('.price-container');
+  const availability = document.querySelectorAll('.availability');
+  const available  = availability[index];
+  const productPrice = productsPrice[index];
+  let tempDisPrice = orderListData[index].discounted_price;
+  let tempOriPrice = orderListData[index].original_price;
+  let bookAvailabe = orderListData[index].availability;
+// book quantity control
+  if(value){
+    if(bookAvailabe > 0){
+      productQuantity = productQuantity + 1;
+      bookAvailabe = bookAvailabe - 1;
+    }
+  }else{
+    if(productQuantity > 1){
+      productQuantity = productQuantity - 1;
+      bookAvailabe = bookAvailabe + 1;
+    }
+  }
+  orderListData[index].availability = bookAvailabe;
+// price calculation
+  tempDisPrice = tempDisPrice *  productQuantity;
+  tempOriPrice = tempOriPrice *  productQuantity;
+  const newPrice = `<span class="price-original">tk${tempOriPrice}</span>
+                    <span class="price-discount">tk${tempDisPrice}</span>`;
+console.log(bookAvailabe)
+  product.innerHTML = productQuantity;
+  productPrice.innerHTML = newPrice;
+  available.innerHTML = bookAvailabe;
+}
+
