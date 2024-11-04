@@ -430,3 +430,6 @@
     border: none;
     background-color: transparent;
 }
+.original-price {
+    text-decoration: line-through;
+}
