@@ -1,5 +1,5 @@
 // global variable
-let totalParchaseAmount = 700;
+let totalParchaseAmount ;
 let trackOfferDiv;
 let selectAllDiv;
 let orderListDiv;
@@ -44,7 +44,7 @@ function DiscountAmount() {
   trackOfferDiv = document.getElementById("track-offer");
   trackOfferDiv.innerHTML = `<div class="discount-container">
     <span class="discount-text">Your total</span>
-    <span class="discount-on-order">ট${totalParchaseAmount}</span>
+    <span class="discount-on-order" id="discount-on-order">ট${totalParchaseAmount}</span>
     </div>`;
 
   if (discountData) {
@@ -115,7 +115,7 @@ function OrderList() {
     <div>
         <div class="order-list-elements">
             <div class="order-list-info">
-            <div class="order-checkbox"><input data-index=${index} type="checkbox" class="product-checkbox" name="checkbox" value="" onchange="handleYourTotal(${index})"/></div> 
+            <div class="order-checkbox"><input data-index=${index} type="checkbox" class="product-checkbox" name="checkbox" value="" onchange="handleBookSlection(${index})"/></div> 
                 <div class="product-img"><img class="order-product-img" src="./assets/book.jpg" /></div> 
                 <div class="product-info">
                 <div class="product-data">
@@ -215,9 +215,11 @@ function CustomerAddress(addressData) {
 // handle select all function
 function handleSelectAll() {
   selectAllState = !selectAllState;
-  console.log(selectAllState);
   ProductInputCheckbox();
   handleYourTotal();
+
+  // update dom of prgress bar in total
+  handleBookSlection();
 }
 
 // checked uncheck checking
@@ -269,6 +271,13 @@ function handleProductQuantity(index, value) {
   productPrice.innerHTML = newPrice;
   available.innerHTML = bookAvailabe;
   handleYourTotal();
+  handleBookSlection();
+}
+
+// handle book selection chekbox
+function handleBookSlection(){
+  handleYourTotal();
+  progressBarYourTotal();
 }
 
 // handle your total ammount
@@ -310,6 +319,8 @@ function handleYourTotal() {
       break;
     }
   }
+
+  totalParchaseAmount = totalDiscountPrice;
   
 
   document.querySelector(
@@ -318,9 +329,16 @@ function handleYourTotal() {
   <span class="discounted-price"> ট${totalOriginalPrice}</span>
   <span class="original-price">ট${totalDiscountPrice}</span>
   `;
-
   // call check sumury to update based on action
   checkSummary();
+  handleProgressBard();
+}
+
+// function for updating progress bar total ammount
+function progressBarYourTotal(){
+  // update dom of prgress bar in total
+  const totaldiv = document.getElementById('discount-on-order');
+  totaldiv.innerHTML =`ট${totalParchaseAmount}`;
 }
 
 //check sumury handle function
@@ -373,12 +391,14 @@ function handleCloseModal(){
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  DiscountAmount();
+  
   SelectAll();
   OrderList();
   CustomerAddress(addressData);
   handleYourTotal();
+  DiscountAmount();
   checkSummary();
+  handleProgressBard();
 
   // add event listener for closing the modal
   document.getElementById('modal-container').addEventListener('click', function(event) {
@@ -463,4 +483,18 @@ function handleFormValidation(e){
     handleCloseModal();
   }
    
+}
+
+
+
+// function for handaling progressbar
+function handleProgressBard(){
+        let progressWidth = totalParchaseAmount * (1/8);
+        if(progressWidth>=100){
+          progressWidth = 100;
+        }
+        const progress = document.getElementById('progress-bar-front');
+        progress.style.width = `${progressWidth}%`;
+        console.log(progressWidth);
+      
 }
