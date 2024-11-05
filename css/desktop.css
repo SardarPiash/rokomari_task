@@ -568,3 +568,32 @@
     flex-direction: row;
     color: rgb(67, 185, 185);
   }
+.radio-input{
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 5px;
+}
+.save-address-button{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+.save-address-button button:first-child{
+    width: 20%;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid var(--borderclr);
+    border-radius: 5px;
+    background-color: aqua;
+    cursor: pointer;
+}
+.save-address-button button:first-child:hover{
+    width: 20%;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: aqua;
+}

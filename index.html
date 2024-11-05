@@ -123,30 +123,57 @@
               <div class="input-filed">
                 <span>Name:</span>
                 <span>
-                  <input type="text" name="name" value />
+                  <input type="text" name="name" value="" id="name"/>
                 </span>
               </div>
+              <div>
+                <span id="name-error"></span>
+              </div>
+
               <div class="input-filed">
                 <span>Phone Number:</span>
                 <span>
-                  <input type="text" name="phoneNumber" value="" />
+                  <input type="text" name="phoneNumber" value="" id="phoneNumber"/>
                 </span>
               </div>
+              <div>
+                <span id="phoneNumber-error"></span>
+              </div>
+
               <div class="input-filed">
                 <span>Area:</span>
                 <span>
-                  <input type="text" name="area" value="" />
+                  <input type="text" name="area" value="" id="area"/>
                 </span>
               </div>
+              <div>
+                <span id="area-error"></span>
+              </div>
+
+              <div class="radio-input">
+                <span>Delivery Place:</span>
+                <span style="display: flex; flex-direction: row;margin-top: 3px;">
+                  <input type="radio" name="deliveryPlace" value="Home" id="deliveryPlace"/>Home
+                  <input type="radio" name="deliveryPlace" value="Office" id="deliveryPlace"/>Office
+                </span>
+              </div>
+              <div>
+                <span id="deliveryPlace-error"></span>
+              </div>
+
               <div class="input-filed">
                 <span>Full Address:</span>
                 <span>
-                  <input type="text" name="area" value="" style="height: 50px;"/>
+                  <input type="text" name="fullAddress" value="" style="height: 50px;" id="fullAddress"/>
                 </span>
               </div>
+              <div>
+                <span id="fullAddress-error"></span>
+              </div>
+
             </div>
-            <div>
-              <button>Save Address</button>
+            <div class="save-address-button">
+              <button type="submit" >Save Address</button>
             </div>
           </div>
         </form>

@@ -170,7 +170,7 @@ const addressData = {
 };
 function CustomerAddress(addressData) {
   const customerAddressDiv = document.getElementById("customer-address");
-  // customerAddressDiv.classList.add('customer-address-container')
+  customerAddressDiv.innerHTML = '';
   const address = document.createElement("div");
   address.innerHTML = `
         <div class="customer-address-container">
@@ -357,6 +357,13 @@ function checkSummary(){
 function handleOpenModal(){
  const modal = document.getElementById('modal-container');
  modal.style.display = 'block';
+
+//  set value to the input field
+  document.querySelector("input[name='name']").value = addressData.name;
+  document.querySelector("input[name='phoneNumber']").value = addressData.phone;
+  document.querySelector("input[name='area']").value = addressData.area;
+  document.querySelector("input[name='deliveryPlace'][value='" + addressData.place + "']").checked = true;
+  document.querySelector("input[name='fullAddress']").value = addressData.fullAddress;
 }
 //close modal
 function handleCloseModal(){
@@ -380,4 +387,80 @@ document.addEventListener("DOMContentLoaded", () => {
       handleCloseModal();
     }
   });
+
+  // add event listener to the form
+  document.querySelector("form").addEventListener("submit", handleFormValidation);
 });
+
+
+// form field validation and submit data
+function handleFormValidation(e){
+  e.preventDefault();
+  let flag = false;
+  let name = document.getElementById("name").value.trim();
+  let phoneNumber = document.getElementById("phoneNumber").value.trim();
+  let area = document.getElementById("area").value.trim();
+  let deliveryPlace = document.querySelector("input[name='deliveryPlace']:checked")?.value;;
+  let fullAddress = document.getElementById("fullAddress").value.trim();
+
+  console.log(name,phoneNumber,area,fullAddress,deliveryPlace)
+
+  if(name == ""){
+    document.getElementById("name-error").innerHTML="Enter your name please!"
+    flag = false;
+    return;
+  }else{
+    document.getElementById("name-error").innerHTML="";
+    flag = true;
+  }
+
+  if(phoneNumber == ""){
+    document.getElementById("phoneNumber-error").innerHTML="Enter your phone number please!"
+    flag = false;
+    return;
+  }else{
+    document.getElementById("phoneNumber-error").innerHTML="";
+    flag = true;
+  }
+
+  if(area == ""){
+    document.getElementById("area-error").innerHTML="Enter your area please!"
+    flag = false;
+    return;
+  }else{
+    document.getElementById("area-error").innerHTML="";
+    flag = true;
+  }
+
+  if(deliveryPlace === undefined){
+    document.getElementById("deliveryPlace-error").innerHTML="Enter your delivery Place please!"
+    flag = false;
+    return;
+  }else{
+    document.getElementById("deliveryPlace-error").innerHTML="";
+    flag = true;
+  }
+
+  if(fullAddress == ""){
+    document.getElementById("fullAddress-error").innerHTML="Enter your full address please!"
+    flag = false;
+    return;
+  }else{
+    document.getElementById("fullAddress-error").innerHTML="";
+    flag = true;
+  }
+
+
+  if(flag){
+    addressData.name = name;
+    addressData.phone = phoneNumber;
+    addressData.fullAddress = fullAddress;
+    addressData.area = area;
+    addressData.place = deliveryPlace;
+
+    console.log(addressData)
+    CustomerAddress(addressData);
+    handleCloseModal();
+  }
+   
+}
