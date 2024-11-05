@@ -26,9 +26,9 @@
   height: 100%;
 }
 .order-track-container {
-  width: 65%;
+  width: 100%;
   height: 100%;
-  border: 1px solid black;
+  border: 1px solid var(--borderclr);
 }
 .ship-address-container {
   width: 30%;
@@ -39,10 +39,7 @@
 }
 
 /* order-track-container */
-.order-track-container {
-  width: 100%;
-  height: 100%;
-}
+
 .track-text {
   width: 90%;
   height: 100%;
@@ -67,15 +64,14 @@
 .progress-container {
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 30px;
 }
 .progress-bar {
-  width: 94%;
+  width: 88%;
   height: 100%;
   display: flex;
   flex-direction: row;
-  gap: 15px;
-  margin-left: 22px;
+  gap: 0px;
 }
 .track-offer {
   width: 100%;
@@ -102,9 +98,9 @@
 /* Select box css */
 .select-container {
   width: 100%;
-  height: 50px;
+  height: auto;
   margin-top: 5px;
-  border: 1px solid black;
+  border: 1px solid var(--borderclr);
 }
 .select-elements {
   width: 100%;
@@ -113,14 +109,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 30px 10px 10px;
+  padding: 10px;
 }
 
 /*order list container */
 .order-list-container {
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  border: 1px solid var(--borderclr);
   margin-top: 10px;
 }
 .order-list-elements {
@@ -301,7 +297,7 @@
 }
 
 .border {
-  border-top: 1px solid black;
+  border-top: 1px solid var(--borderclr);
 }
 
 /* shipping address container css */
@@ -700,7 +696,7 @@
 
 /* progress bar create */
 .progress-bar-container {
-  width: 110px;
+  width: 100%;
   height: 15px;
   margin-top: 12px;
   margin-right: 10px;
@@ -730,11 +726,11 @@
 }
 
 .select-total-amount {
-  width: 35%;
-  font-size: 25px;
+  width: 40%;
+  font-size: 22px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: end;
 }
 
 .select-discount-text {
