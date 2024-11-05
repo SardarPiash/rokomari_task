@@ -81,12 +81,11 @@ function SelectAll() {
     <span>SelectAll(2 items)</span>
     </div>
     <div class="select-total-amount"> 
-    <span>Your Total: 
-        <span class="select-discount-text">
+            <span class="total-text">Your Total: </span>
+            <span class="select-discount-text">
             <span class="original-price">ট 0</span>
             <span class="discounted-price"> ট 0</span>
-        </span>
-    </span>
+             </span>
 </div>
 
     `;
@@ -120,16 +119,22 @@ function OrderList() {
                 <div class="product-info">
                 <div class="product-data">
                     <span>${data.title}</span>
-                    <span>${data.author}</span>
-                    <span>Only <span class="availability">${data.availability}</span> Copies Available</span>
+                    <span class="author-name-text">${data.author}</span>
+                    <span class="available-text">*Only <span class="availability">${data.availability}</span> Copies Available</span>
                     </div>
                     <div class="product-info-action">
-                        <span>
-                            <button>delete</button>
-                        </span>
-                        <span>
-                            <button>wishlist</button>
-                        </span>
+                        <div>
+                            <button class="action-button">
+                            <img src="./assets/delete.png" class="dlt-icon" />
+                            <span style="margin-top: 2px;">Delete</span>
+                            </button>
+                        </div>
+                        <div>
+                            <button class="action-button">
+                             <img src="./assets/love.png" class="love-icon" />
+                             <span style="margin-top: 2px;">Wishlist</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
