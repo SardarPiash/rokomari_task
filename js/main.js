@@ -1,5 +1,5 @@
 // global variable
-let totalParchaseAmount ;
+let totalParchaseAmount;
 let trackOfferDiv;
 let selectAllDiv;
 let orderListDiv;
@@ -7,8 +7,8 @@ let productQuantity;
 let tempDisPrice = 0;
 let tempOriPrice = 0;
 let selectAllState = true;
-let discountOffer = 0 ;
-let shippingCharge = 70 ;
+let discountOffer = 0;
+let shippingCharge = 70;
 let discountOnShippingCharge = 0;
 
 // discount on offer track
@@ -175,7 +175,7 @@ const addressData = {
 };
 function CustomerAddress(addressData) {
   const customerAddressDiv = document.getElementById("customer-address");
-  customerAddressDiv.innerHTML = '';
+  customerAddressDiv.innerHTML = "";
   const address = document.createElement("div");
   address.innerHTML = `
         <div class="customer-address-container">
@@ -280,7 +280,7 @@ function handleProductQuantity(index, value) {
 }
 
 // handle book selection chekbox
-function handleBookSlection(){
+function handleBookSlection() {
   handleYourTotal();
   progressBarYourTotal();
 }
@@ -312,7 +312,7 @@ function handleYourTotal() {
 
   //handle select checked
   for (let i = 0; i < flag.length; i++) {
-    console.log(flag[i])
+    console.log(flag[i]);
     if (flag[i]) {
       selectAllState = true;
       let checkedb = document.getElementById("select-all-input");
@@ -326,7 +326,6 @@ function handleYourTotal() {
   }
 
   totalParchaseAmount = totalDiscountPrice;
-  
 
   document.querySelector(
     ".select-total-amount .select-discount-text"
@@ -341,73 +340,71 @@ function handleYourTotal() {
 }
 
 // function for updating progress bar total ammount
-function progressBarYourTotal(){
+function progressBarYourTotal() {
   // update dom of prgress bar in total
-  const totaldiv = document.getElementById('discount-on-order');
-  totaldiv.innerHTML =`ট${totalParchaseAmount}`;
+  const totaldiv = document.getElementById("discount-on-order");
+  totaldiv.innerHTML = `ট${totalParchaseAmount}`;
 }
 
 //check sumury handle function
-function checkSummary(){
-   const priceDiv = document.querySelectorAll('.original-price');
-   let price = parseInt((priceDiv[0].innerHTML).replace(/[^0-9]/g, ''));
-   
-   price = price;
-   let shipment = shippingCharge - discountOffer;
+function checkSummary() {
+  const priceDiv = document.querySelectorAll(".original-price");
+  let price = parseInt(priceDiv[0].innerHTML.replace(/[^0-9]/g, ""));
 
-   let totalPrice = price + shipment;
-   
-   const subtotal = document.querySelectorAll('.checkout-details-container')[0];
-   const shipping = document.querySelectorAll('.checkout-details-container')[1];
-   const total = document.querySelectorAll('.checkout-details-container')[2];
-   
-   subtotal.innerHTML=`
+  price = price;
+  let shipment = shippingCharge - discountOffer;
+
+  let totalPrice = price + shipment;
+
+  const subtotal = document.querySelectorAll(".checkout-details-container")[0];
+  const shipping = document.querySelectorAll(".checkout-details-container")[1];
+  const total = document.querySelectorAll(".checkout-details-container")[2];
+
+  subtotal.innerHTML = `
    <span>Subtotal</span>
    <span>ট ${price}</span>
    `;
 
-   if(shipment === 0){
-    shipping.innerHTML=`
+  if (shipment === 0) {
+    shipping.innerHTML = `
    <span>Shipping</span>
    <span>Free</span>
    `;
-   }else{
-    shipping.innerHTML=`
+  } else {
+    shipping.innerHTML = `
    <span>Shipping</span>
    <span>ট ${shipment}</span>
    `;
-   }
-   
+  }
 
-   total.innerHTML=`
+  total.innerHTML = `
    <span>Total</span>
    <span>ট ${totalPrice}</span>
    `;
 }
 
-
-
 //open modal
-function handleOpenModal(){
- const modal = document.getElementById('modal-container');
- modal.style.display = 'block';
+function handleOpenModal() {
+  const modal = document.getElementById("modal-container");
+  modal.style.display = "block";
 
-//  set value to the input field
+  //  set value to the input field
   document.querySelector("input[name='name']").value = addressData.name;
   document.querySelector("input[name='phoneNumber']").value = addressData.phone;
   document.querySelector("input[name='area']").value = addressData.area;
-  document.querySelector("input[name='deliveryPlace'][value='" + addressData.place + "']").checked = true;
-  document.querySelector("input[name='fullAddress']").value = addressData.fullAddress;
+  document.querySelector(
+    "input[name='deliveryPlace'][value='" + addressData.place + "']"
+  ).checked = true;
+  document.querySelector("input[name='fullAddress']").value =
+    addressData.fullAddress;
 }
 //close modal
-function handleCloseModal(){
-  const modal = document.getElementById('modal-container');
-  modal.style.display = 'none';
+function handleCloseModal() {
+  const modal = document.getElementById("modal-container");
+  modal.style.display = "none";
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  
   SelectAll();
   OrderList();
   CustomerAddress(addressData);
@@ -417,142 +414,140 @@ document.addEventListener("DOMContentLoaded", () => {
   handleProgressBar();
 
   // add event listener for closing the modal
-  document.getElementById('modal-container').addEventListener('click', function(event) {
-    const modalContent = document.getElementById('modal');
-    if (event.target === this) { 
-      handleCloseModal();
-    }
-  });
+  document
+    .getElementById("modal-container")
+    .addEventListener("click", function (event) {
+      const modalContent = document.getElementById("modal");
+      if (event.target === this) {
+        handleCloseModal();
+      }
+    });
 
   // add event listener to the form
-  document.querySelector("form").addEventListener("submit", handleFormValidation);
+  document
+    .querySelector("form")
+    .addEventListener("submit", handleFormValidation);
 });
 
-
 // form field validation and submit data
-function handleFormValidation(e){
+function handleFormValidation(e) {
   e.preventDefault();
   let flag = false;
   let name = document.getElementById("name").value.trim();
   let phoneNumber = document.getElementById("phoneNumber").value.trim();
   let area = document.getElementById("area").value.trim();
-  let deliveryPlace = document.querySelector("input[name='deliveryPlace']:checked")?.value;;
+  let deliveryPlace = document.querySelector(
+    "input[name='deliveryPlace']:checked"
+  )?.value;
   let fullAddress = document.getElementById("fullAddress").value.trim();
 
-  console.log(name,phoneNumber,area,fullAddress,deliveryPlace)
+  console.log(name, phoneNumber, area, fullAddress, deliveryPlace);
 
-  if(name == ""){
-    document.getElementById("name-error").innerHTML="Enter your name please!"
+  if (name == "") {
+    document.getElementById("name-error").innerHTML = "Enter your name please!";
     flag = false;
     return;
-  }else{
-    document.getElementById("name-error").innerHTML="";
+  } else {
+    document.getElementById("name-error").innerHTML = "";
     flag = true;
   }
 
-  if(phoneNumber == ""){
-    document.getElementById("phoneNumber-error").innerHTML="Enter your phone number please!"
+  if (phoneNumber == "") {
+    document.getElementById("phoneNumber-error").innerHTML =
+      "Enter your phone number please!";
     flag = false;
     return;
-  }else{
-    document.getElementById("phoneNumber-error").innerHTML="";
+  } else {
+    document.getElementById("phoneNumber-error").innerHTML = "";
     flag = true;
   }
 
-  if(area == ""){
-    document.getElementById("area-error").innerHTML="Enter your area please!"
+  if (area == "") {
+    document.getElementById("area-error").innerHTML = "Enter your area please!";
     flag = false;
     return;
-  }else{
-    document.getElementById("area-error").innerHTML="";
+  } else {
+    document.getElementById("area-error").innerHTML = "";
     flag = true;
   }
 
-  if(deliveryPlace === undefined){
-    document.getElementById("deliveryPlace-error").innerHTML="Enter your delivery Place please!"
+  if (deliveryPlace === undefined) {
+    document.getElementById("deliveryPlace-error").innerHTML =
+      "Enter your delivery Place please!";
     flag = false;
     return;
-  }else{
-    document.getElementById("deliveryPlace-error").innerHTML="";
+  } else {
+    document.getElementById("deliveryPlace-error").innerHTML = "";
     flag = true;
   }
 
-  if(fullAddress == ""){
-    document.getElementById("fullAddress-error").innerHTML="Enter your full address please!"
+  if (fullAddress == "") {
+    document.getElementById("fullAddress-error").innerHTML =
+      "Enter your full address please!";
     flag = false;
     return;
-  }else{
-    document.getElementById("fullAddress-error").innerHTML="";
+  } else {
+    document.getElementById("fullAddress-error").innerHTML = "";
     flag = true;
   }
 
-
-  if(flag){
+  if (flag) {
     addressData.name = name;
     addressData.phone = phoneNumber;
     addressData.fullAddress = fullAddress;
     addressData.area = area;
     addressData.place = deliveryPlace;
 
-    console.log(addressData)
+    console.log(addressData);
     CustomerAddress(addressData);
     handleCloseModal();
   }
-   
 }
 
-
-
 // function for handaling progressbar
-function progressBardraw(value,progressWidth){
-       
-        if(progressWidth>=100){
-          progressWidth = 100;
-        }
-        
-        const progress = document.getElementById(`${value}`);
-        if(progress){
-          progress.style.width = `${progressWidth}%`;
-          console.log(progressWidth);
-        }
-        
-      
+function progressBardraw(value, progressWidth) {
+  if (progressWidth >= 100) {
+    progressWidth = 100;
+  }
+
+  const progress = document.getElementById(`${value}`);
+  if (progress) {
+    progress.style.width = `${progressWidth}%`;
+    console.log(progressWidth);
+  }
 }
 
 // handleProgressBar
-function handleProgressBar(){ 
-
-  const p = document.querySelectorAll('.progress-bar-front');
-        p.forEach((data)=>{
-          data.style.width = '0%';
-          
-        })
-  if(totalParchaseAmount<=800){
-    progressBardraw('progress1-front',totalParchaseAmount * (1/8));
-  }else if(totalParchaseAmount>800 && totalParchaseAmount<=1200){
-    progressBardraw('progress1-front',100);
-    progressBardraw('progress2-front',(totalParchaseAmount - 800) * (1/4));
-  }else if(totalParchaseAmount>1200 && totalParchaseAmount<=1600){
-
-    progressBardraw('progress1-front',100);
-    progressBardraw('progress2-front',100);
-    progressBardraw('progress3-front',(totalParchaseAmount - 1200) * (1/4));
-  }else if(totalParchaseAmount>1600 ){
-    progressBardraw('progress1-front',100);
-    progressBardraw('progress2-front',100);
-    progressBardraw('progress3-front',100);
-    progressBardraw('progress4-front',(totalParchaseAmount - 1600) * (1/4));
-  }  
+function handleProgressBar() {
+  const p = document.querySelectorAll(".progress-bar-front");
+  p.forEach((data) => {
+    data.style.width = "0%";
+  });
+  if (totalParchaseAmount <= 800) {
+    progressBardraw("progress1-front", totalParchaseAmount * (1 / 8));
+  } else if (totalParchaseAmount > 800 && totalParchaseAmount <= 1200) {
+    progressBardraw("progress1-front", 100);
+    progressBardraw("progress2-front", (totalParchaseAmount - 800) * (1 / 4));
+  } else if (totalParchaseAmount > 1200 && totalParchaseAmount <= 1600) {
+    progressBardraw("progress1-front", 100);
+    progressBardraw("progress2-front", 100);
+    progressBardraw("progress3-front", (totalParchaseAmount - 1200) * (1 / 4));
+  } else if (totalParchaseAmount > 1600) {
+    progressBardraw("progress1-front", 100);
+    progressBardraw("progress2-front", 100);
+    progressBardraw("progress3-front", 100);
+    progressBardraw("progress4-front", (totalParchaseAmount - 1600) * (1 / 4));
+  }
 
   // set discount
-  if(totalParchaseAmount>=800 && totalParchaseAmount <1200){
-    discountOffer = 10 ;
-  }else if(totalParchaseAmount>=1200 && totalParchaseAmount <1600){
-    discountOffer = 20 ;
-  }else if(totalParchaseAmount>=1600 && totalParchaseAmount <2000){
-    discountOffer = 30 ;
-  }else if(totalParchaseAmount>=2000){
-    discountOffer = 70 ;
+  if (totalParchaseAmount >= 800 && totalParchaseAmount < 1200) {
+    discountOffer = 10;
+  } else if (totalParchaseAmount >= 1200 && totalParchaseAmount < 1600) {
+    discountOffer = 20;
+  } else if (totalParchaseAmount >= 1600 && totalParchaseAmount < 2000) {
+    discountOffer = 30;
+  } else if (totalParchaseAmount >= 2000) {
+    discountOffer = 70;
   }
 
   // call checksumy for dom update
