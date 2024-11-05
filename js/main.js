@@ -331,7 +331,8 @@ function handleYourTotal() {
   `;
   // call check sumury to update based on action
   checkSummary();
-  handleProgressBard();
+  handleProgressBar();
+  handleProgressBar();
 }
 
 // function for updating progress bar total ammount
@@ -398,7 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
   handleYourTotal();
   DiscountAmount();
   checkSummary();
-  handleProgressBard();
+  handleProgressBar();
 
   // add event listener for closing the modal
   document.getElementById('modal-container').addEventListener('click', function(event) {
@@ -488,13 +489,42 @@ function handleFormValidation(e){
 
 
 // function for handaling progressbar
-function handleProgressBard(){
-        let progressWidth = totalParchaseAmount * (1/8);
+function progressBardraw(value,progressWidth){
+       
         if(progressWidth>=100){
           progressWidth = 100;
         }
-        const progress = document.getElementById('progress-bar-front');
-        progress.style.width = `${progressWidth}%`;
-        console.log(progressWidth);
+        
+        const progress = document.getElementById(`${value}`);
+        if(progress){
+          progress.style.width = `${progressWidth}%`;
+          console.log(progressWidth);
+        }
+        
       
+}
+
+// handleProgressBar
+function handleProgressBar(){ 
+
+  const p = document.querySelectorAll('.progress-bar-front');
+        p.forEach((data)=>{
+          data.style.width = '0%';
+          
+        })
+  if(totalParchaseAmount<=800){
+    progressBardraw('progress1-front',totalParchaseAmount * (1/8));
+  }else if(totalParchaseAmount>800 && totalParchaseAmount<=1200){
+    progressBardraw('progress1-front',100);
+    progressBardraw('progress2-front',(totalParchaseAmount - 800) * (1/4));
+  }else if(totalParchaseAmount>1200 && totalParchaseAmount<=1600){
+    progressBardraw('progress1-front',100);
+    progressBardraw('progress2-front',100);
+    progressBardraw('progress3-front',(totalParchaseAmount - 1200) * (1/4));
+  }else if(totalParchaseAmount>1600 ){
+    progressBardraw('progress1-front',100);
+    progressBardraw('progress2-front',100);
+    progressBardraw('progress3-front',100);
+    progressBardraw('progress4-front',(totalParchaseAmount - 1600) * (1/4));
+  }  
 }
