@@ -4,8 +4,8 @@ let trackOfferDiv;
 let selectAllDiv;
 let orderListDiv;
 let productQuantity;
-let tempDisPrice = 10;
-let tempOriPrice = 10;
+let tempDisPrice = 0;
+let tempOriPrice = 0;
 let selectAllState = true;
 let discountOffer = 0 ;
 let shippingCharge = 70 ;
@@ -348,7 +348,9 @@ function checkSummary(){
    let price = parseInt((priceDiv[0].innerHTML).replace(/[^0-9]/g, ''));
    
    price = price;
-   let totalPrice = price + shippingCharge;
+   let shipment = shippingCharge - discountOffer;
+
+   let totalPrice = price + shipment;
    
    const subtotal = document.querySelectorAll('.checkout-details-container')[0];
    const shipping = document.querySelectorAll('.checkout-details-container')[1];
@@ -359,10 +361,18 @@ function checkSummary(){
    <span>ট ${price}</span>
    `;
 
-   shipping.innerHTML=`
+   if(shipment === 0){
+    shipping.innerHTML=`
    <span>Shipping</span>
-   <span>ট ${shippingCharge}</span>
+   <span>Free</span>
    `;
+   }else{
+    shipping.innerHTML=`
+   <span>Shipping</span>
+   <span>ট ${shipment}</span>
+   `;
+   }
+   
 
    total.innerHTML=`
    <span>Shipping</span>
@@ -518,6 +528,7 @@ function handleProgressBar(){
     progressBardraw('progress1-front',100);
     progressBardraw('progress2-front',(totalParchaseAmount - 800) * (1/4));
   }else if(totalParchaseAmount>1200 && totalParchaseAmount<=1600){
+
     progressBardraw('progress1-front',100);
     progressBardraw('progress2-front',100);
     progressBardraw('progress3-front',(totalParchaseAmount - 1200) * (1/4));
@@ -527,4 +538,18 @@ function handleProgressBar(){
     progressBardraw('progress3-front',100);
     progressBardraw('progress4-front',(totalParchaseAmount - 1600) * (1/4));
   }  
+
+  // set discount
+  if(totalParchaseAmount>=800 && totalParchaseAmount <1200){
+    discountOffer = 10 ;
+  }else if(totalParchaseAmount>=1200 && totalParchaseAmount <1600){
+    discountOffer = 20 ;
+  }else if(totalParchaseAmount>=1600 && totalParchaseAmount <2000){
+    discountOffer = 30 ;
+  }else if(totalParchaseAmount>=2000){
+    discountOffer = 70 ;
+  }
+
+  // call checksumy for dom update
+  checkSummary();
 }
