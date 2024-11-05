@@ -380,7 +380,7 @@ function checkSummary(){
    
 
    total.innerHTML=`
-   <span>Shipping</span>
+   <span>Total</span>
    <span>ট ${totalPrice}</span>
    `;
 }
