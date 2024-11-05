@@ -386,9 +386,12 @@ function checkSummary() {
 //open modal
 function handleOpenModal() {
   const modal = document.getElementById("modal-container");
-  modal.style.display = "block";
+  modal.style.display = "flex"; 
+  setTimeout(() => {
+    modal.classList.add("show-modal"); 
+  }, 10); 
 
-  //  set value to the input field
+  // Set values to the input fields
   document.querySelector("input[name='name']").value = addressData.name;
   document.querySelector("input[name='phoneNumber']").value = addressData.phone;
   document.querySelector("input[name='area']").value = addressData.area;
@@ -398,11 +401,17 @@ function handleOpenModal() {
   document.querySelector("input[name='fullAddress']").value =
     addressData.fullAddress;
 }
-//close modal
+
+// Close modal with animation
 function handleCloseModal() {
   const modal = document.getElementById("modal-container");
-  modal.style.display = "none";
+  modal.classList.remove("show-modal"); 
+  setTimeout(() => {
+    modal.style.display = "none"; 
+  }, 300); 
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   SelectAll();
@@ -515,13 +524,18 @@ function progressBardraw(value, progressWidth) {
     progress.style.width = `${progressWidth}%`;
     console.log(progressWidth);
   }
+
 }
 
 // handleProgressBar
 function handleProgressBar() {
   const p = document.querySelectorAll(".progress-bar-front");
+  const circleClr = document.querySelectorAll(".circle-border")
   p.forEach((data) => {
     data.style.width = "0%";
+  });
+  circleClr.forEach((data) => {
+    data.style.borderColor = "rgb(151, 152, 152)";
   });
   if (totalParchaseAmount <= 800) {
     progressBardraw("progress1-front", totalParchaseAmount * (1 / 8));
@@ -542,14 +556,32 @@ function handleProgressBar() {
   // set discount
   if (totalParchaseAmount >= 800 && totalParchaseAmount < 1200) {
     discountOffer = 10;
+    handleCircleColor("circle2");
   } else if (totalParchaseAmount >= 1200 && totalParchaseAmount < 1600) {
     discountOffer = 20;
+    handleCircleColor("circle2");
+    handleCircleColor("circle3");
   } else if (totalParchaseAmount >= 1600 && totalParchaseAmount < 2000) {
     discountOffer = 30;
+    handleCircleColor("circle2");
+    handleCircleColor("circle3");
+    handleCircleColor("circle4");
   } else if (totalParchaseAmount >= 2000) {
     discountOffer = 70;
+    handleCircleColor("circle2");
+    handleCircleColor("circle3");
+    handleCircleColor("circle4");
+    handleCircleColor("circle5");
   }
 
   // call checksumy for dom update
   checkSummary();
+}
+
+// circle color handle
+function handleCircleColor(value){
+  const progress = document.getElementById(`${value}`);
+  if(progress){
+    progress.style.borderColor = "rgb(49, 162, 162)";
+  }
 }
